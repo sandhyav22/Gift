@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Index</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 30px;
+      background: #fff;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* LOGO */
+.logo img {
+  width: 100px; /* adjust as needed */
+  animation: toggleGlow 2s infinite ease-in-out;
+}
+
+@keyframes toggleGlow {
+  0% {
+    filter: drop-shadow(0 0 0px #000);   /* OFF */
+  }
+  50% {
+    filter: drop-shadow(0 0 15px #f3b919); /* ON: bright cyan glow */
+  }
+  100% {
+    filter: drop-shadow(0 0 0px #000);   /* OFF */
+  }
+}
+
+    /* CENTER MENU */
+    .menu a.active {
+      color: #F1C40F;
+    }
+    .menu {
+      display: flex;
+      gap: 25px;
+    }
+    .menu a {
+      text-decoration: none;
+      color: black;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    /* REGISTER BUTTON */
+    .register-btn {
+      padding: 8px 16px;
+      background: #F1C40F;
+      color: black;
+      border-radius: 15px;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    /* SEARCH BAR */
+    .search-bar {
+      width: 100%;
+      padding: 10px;
+      text-align: center;
+      background: white;
+  
+     
+    }
+    .search-bar input {
+      width: 80%;
+      max-width: 450px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    /* MOBILE MENU ICON */
+    .menu-toggle {
+      display: none;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width: 768px) {
+      .menu {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        display: none;
+        flex-direction: column;
+        padding: 20px 0;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        text-align: center;
+      }
+      .menu a {
+        padding: 10px 0;
+      }
+      .menu.show {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .register-btn {
+        display: none;
+      }
+    }
+  .company-name {
+      font-family: "Brush Script MT", cursive;
+      font-size: 26px;
+      margin-top: 8px;
+      padding: 0;
+      color: #555;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      border: none;
+      display: block;
+    }
+  </style>
+  <!-- Font Awesome -->
+   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo" style="text-align:center;">
+      <img src="image/Frame 427318985.png" alt="Logo" />
+      <div class="company-name">VibeyGiftoy</div>
+    </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <div class="menu" id="menu">
+      <a href="index.html">Home</a>
+      <a href="categories.html">Categories</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="about.html">About Us</a>
+    </div>
+
+    <a href="#" class="register-btn" onclick="openLogin()">Register</a>
+  </nav>
+<div id="loginModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+
+    <div class="modal-left">
+      <h2>Register Free!</h2>
+      <!-- <form> changed to include onsubmit -->
+      <form onsubmit="goToLoginPage(event)">
+        <input type="email" placeholder="Enter your e-mail" required>
+        <input type="password" placeholder="Password" required>
+        <!-- keep type="submit" but remove onclick -->
+       <button type="button" class="login-btn" onclick="goToLoginPage(event)">Login</button>
+        <div class="forgot">
+          <a href="#">Forgot your password?</a>
+        </div>
+
+        <div class="divider">Sign Up Using</div>
+
+        <div class="social-icons">
+          <button type="button">
+            <img src="image/google-removebg-preview.png" alt="Google">
+          </button>
+          <button type="button">
+            <img src="image/facebook-removebg-preview.png" alt="Facebook">
+          </button>
+          <button type="button">
+            <img src="image/instagram-removebg-preview.png" alt="Instagram">
+          </button>
+          <button type="button">
+            <img src="image/twitter-removebg-preview (1).png" alt="Twitter">
+          </button>
+        </div>
+
+        <p class="create-account">
+          Don’t have an account?
+          <a href="#" onclick="switchToSignup()">Create New Account</a>
+        </p>
+      </form>
+    </div>
+
+    <div class="modal-right">
+      <img src="image/ChatGPT Image Sep 11, 2025, 11_24_12 AM 2.png" alt="image">
+    </div>
+  </div>
+</div>
+
+<!-- Signup Modal -->
+<div id="signupModal" class="modal" style="display:none;">
+  <div class="modal-content1">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+
+    <div class="modal-right1">
+      <h2>Sign Up</h2>
+      <!-- use onsubmit here too -->
+      <form onsubmit="goToSignupPage(event)">
+        <input type="text" placeholder="Full Name" required>
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
+        <!-- keep type="submit" but remove onclick -->
+        <button type="button" class="login-btn" onclick="goToSignupPage(event)">Sign Up</button>
+
+        <p class="create-account">
+          Already have an account?
+          <a href="#" onclick="switchToLogin()">Log in</a>
+        </p>
+      </form>
+    </div>
+
+    <div class="modal-left1">
+      <img src="image/image 63.png" alt="imag2">
+    </div>
+  </div>
+</div>
+
+<script>
+  // ✅ Open modals
+  function openLogin() {
+    document.getElementById("loginModal").style.display = "flex";
+  }
+
+  function openSignup() {
+    document.getElementById("signupModal").style.display = "flex";
+  }
+
+  // ✅ Switch between modals
+  function switchToSignup() {
+    document.getElementById("loginModal").style.display = "none";
+    document.getElementById("signupModal").style.display = "flex";
+  }
+
+  function switchToLogin() {
+    document.getElementById("signupModal").style.display = "none";
+    document.getElementById("loginModal").style.display = "flex";
+  }
+
+  // ✅ Close modals
+  function closeModal() {
+    document.getElementById("loginModal").style.display = "none";
+    document.getElementById("signupModal").style.display = "none";
+  }
+
+  // ✅ Close modal when clicking outside
+  window.onclick = function(event) {
+    if (event.target.classList.contains("modal")) {
+      closeModal();
+    }
+  }
+
+  // ✅ Redirect after login or signup
+  function goToLoginPage(event) {
+    event.preventDefault(); // Prevent form reload
+    window.location.href = "newindex.html"; // Redirect to your page
+  }
+
+  function goToSignupPage(event) {
+    event.preventDefault();
+    window.location.href = "newindex.html";
+  }
+</script>
+
+  <div class="search-bar">
+    <div style="position: relative; display: inline-block; width: 80%; max-width: 450px;">
+      <input id="searchInput" type="text" placeholder="Search" style="width: 100%;padding: 10px 40px 10px 12px; border: 1px solid #F1C40F; border-radius: 6px;" />
+      <span style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 18px; cursor: pointer;"><i class="fa-solid fa-magnifying-glass"></i></span>
+
+      <!-- Suggestions -->
+      <div id="suggestions" style="display:none; position:absolute; top:45px; left:0; width:100%; background:#fff; border:1px solid #ddd; border-radius:6px; box-shadow:0 4px 10px rgba(0,0,0,0.1); padding:10px; z-index:20;">
+        <p style="margin:0; padding:8px 0; cursor:pointer;">🎁 Personification Gifts</p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('menu').classList.toggle('show');
+    }
+
+    // Replace value on focus
+    document.addEventListener('DOMContentLoaded', function() {
+      const input = document.getElementById('searchInput');
+      input.addEventListener('focus', function() {
+        input.value = 'Personification Gifts';
+      });
+    });
+  </script>
+</body>
+</html>
+<div class="hero">
+    <img class="hero-bg" src="image/Frame 427318986.png" alt="Banner">
+
+
+    <div class="hero-content">
+        <h1>Wrapped with Love</h1>
+        <p>Every gift tells a story — add your personal touch with thoughtful wrapping and heartfelt notes</p>
+
+        <div class="hero-buttons">
+            <button class="primary-btn" onclick="window.location.href='categories.html'">Explore now</button>
+            <button class="secondary-btn">Enquiry</button>
+        </div>
+
+        <div class="hero-rating">
+            <img class="avatar" src="image/Group 30710.png">
+   <div class="plus-circle">+</div>
+            <span class="rating-text"> 4.9k Ratings+<br><small>Trusted by 50k customers</small></span>
+        </div>
+    </div>
+</div>
+<br>
+<section class="features-section">
+    <h2 class="section-title">Why Choose Us</h2>
+
+    <div class="features-container">
+
+        <div class="feature-box">
+            <div class="feature-card">
+                <img src="image/Christmas Gift Wrapping Ideas – 18 Creative Ways… 1.png" alt="Gift 1">
+            </div>
+            <h3 class="feature-title">Curated Gift Collections</h3>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-card">
+                <img src="image/This Night Lights item by ARTOPSHK has 3088… 2.png" alt="Gift 2">
+            </div>
+            <h3 class="feature-title">Persinalization Options</h3>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-card">
+                <img src="image/🚚✨ “Fantastic delivery service!” – Manmohan… 2.png" alt="Gift 3">
+            </div>
+            <h3 class="feature-title">Fast & Reliable Delivery</h3>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-card">
+                <img src="image/Qr code scanning with characters _ Premium Vector 2.png" alt="Gift 4">
+            </div>
+            <h3 class="feature-title">Easy & Secure Payments</h3>
+        </div>
+
+    </div>
+</section>
+<br>
+<section class="products-section">
+    <h2 class="main-heading">Featured Collections</h2>
+
+    <div class="products-container">
+
+        <div class="product-card">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+
+            <img src="image/image 52.png" class="product-img">
+
+            <h3 class="product-title">The Picture Fram set</h3>
+            <p class="product-subtitle">Rs: 1000 Per Package</p>
+
+            <div class="card-actions">
+                <button class="shop-btn">Shop Now</button>
+                <button class="customize-btn">Customize</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+
+            <img src="image/image 53.png" class="product-img">
+            <h3 class="product-title">The Picture Fram set</h3>
+            <p class="product-subtitle">Rs: 1000 Per Package</p>
+
+            <div class="card-actions">
+                <button class="shop-btn">Shop Now</button>
+                <button class="customize-btn">Customize</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+
+            <img src="image/image 52.png" class="product-img">
+            <h3 class="product-title">The Picture Fram set</h3>
+            <p class="product-subtitle">Rs: 1000 Per Package</p>
+
+            <div class="card-actions">
+                <button class="shop-btn">Shop Now</button>
+                <button class="customize-btn">Customize</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+
+            <img src="image/image 52.png" class="product-img">
+
+            <h3 class="product-title">The Picture Fram set</h3>
+            <p class="product-subtitle">Rs: 1000 Per Package</p>
+
+            <div class="card-actions">
+                <button class="shop-btn">Shop Now</button>
+                <button class="customize-btn">Customize</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+<script>
+        document.querySelectorAll(".heart-btn").forEach(btn => {
+    btn.addEventListener("click", function() {
+        this.classList.toggle("active");
+
+        let icon = this.querySelector("i");
+
+        if (this.classList.contains("active")) {
+            icon.classList.remove("fa-regular");
+            icon.classList.add("fa-solid");
+        } else {
+            icon.classList.remove("fa-solid");
+            icon.classList.add("fa-regular");
+        }
+    });
+});
+</script>
+<br>
+<h2 class="about-heading">Special offer & discounts</h2>
+        <h3 class="about-subheading">OFF SEASON <span style="color: #F1C40F;">COLLECTIONS</span> GET <span style="color: red;">30%</span></h3>
+<section class="about-section">
+    <div class="about-text">
+        
+        <p style="font-weight: 600;font-size: 32px;">"Unwrap the Joy - Special Offers Just for You!"</p>
+        <p>
+    Celebrate every moment with thoughtful giftd at irresistible prices.<br>
+    Discover handpicked treasures for every occasion - now on <br>
+    limited-time discount!
+        </p>
+    </div>
+
+    <div class="about-image">
+        <img src="image/image 8.png" alt="About Image">
+    </div>
+</section>
+<br>
+<section class="faq-section">
+    <h2 class="faq-heading">Frequently Asked Questions</h2>
+
+    <div class="faq-box">
+        <div class="faq-item">
+            <h3 class="faq-question">1. What types of gifts do you offer? <span style="margin-left: 450px;">v</span></h3>
+            <p class="faq-answer">We offer a wide range of gifts for all occasions-birthdays, anniversaries, weddings, corporate<br>
+            events, and more. Our collection includes personalized items, luxury hampers, home decor, custom <br>
+        keepsakes, and curated gift boxes.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3 class="faq-question">2. Do you offer gift wrapping or personalized messages? <span style="margin-left: 250px;">v</span></h3>
+            <p class="faq-answer">Yes! We offer free gift wrapping and the option to include a personalized message with <br>
+            every order. Simpl select the option during checkout.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3 class="faq-question">3. How long does delivery take?<span style="margin-left: 500px;">v</span></h3>
+            <p class="faq-answer">Delivery times vary depending on your location and the product. Standard shipping usually takes<br>
+            3-7 business days, while express shipping is available for 1-3 day delivery. Custom/personalized <br>
+        items may take an extra 1-2 days for processing.</p>
+        </div>
+
+    </div>
+</section>
+<br>
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- Logo Section -->
+    <div class="footer-logo">
+     <div class="logo" style="text-align:center;">
+      <img src="image/Frame 427318985.png" alt="Logo" />
+      <div class="company-name">VibeyGiftoy</div>
+    </div>
+    </div>
+
+    <!-- Links Section -->
+    <div class="footer-links">
+      <div>
+        <h3>Customer service</h3>
+        <ul>
+          <li><a href="#">My Account</a></li>
+          <li><a href="#">Checkup</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Return</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Company</h3>
+        <ul>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Blogs</a></li>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Policy</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Our information</h3>
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms & Condition</a></li>
+          <li><a href="#">Customer Feedback</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="footer-contact">
+      <p><strong>Mobile:</strong> 123-456-789</p>
+      <p><strong>Email:</strong> Vibeygif@gmail.com</p>
+      <p><strong>Address:</strong> 12, North City-001</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Giftey Co. All rights reserved.</p>
+    <p><a href="#">Terms & Conditions</a> | <a href="#">Privacy Policy</a></p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

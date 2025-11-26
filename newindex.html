@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Index</title>
+
+  <!-- Font Awesome -->
+   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+     /* Popup background */
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(3px);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Main popup box */
+.popup-box {
+    background: #eab308; /* golden yellow */
+    width: 80%;
+    padding: 30px;
+    border-radius: 20px;
+    border: 3px dashed #000;
+    position: relative;
+}
+
+/* Closing X button */
+.close-btn {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Title */
+.popup-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+/* Grid layout */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.field label {
+    font-weight: bold;
+}
+
+.field input,
+.field select {
+    width: 80%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 2px solid black;
+    font-size: 16px;
+}
+
+/* Upload box */
+.upload-box {
+    grid-column: span 1;
+}
+
+.upload-area {
+    border: 3px dashed #333;
+    border-radius: 8px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-icon {
+    font-size: 50px;
+}
+
+/* Yes/No choice */
+.choice {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.choice label {
+    margin: 0 25px;
+}
+
+/* Submit button */
+.submit-btn {
+    display: block;
+    margin: 25px auto;
+    padding: 10px 35px;
+    border-radius: 8px;
+    border: 2px solid #000;
+    background: #ffc727;
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 800px;
+}
+
+.image-preview-section {
+    display: flex;
+    justify-content: flex-start;
+    
+}
+/* Image below font style */
+.image-preview-section img {
+    width: 100%;
+    border-radius: 12px;
+    height: 180px;
+    object-fit: cover;
+    border: 2px solid black;
+  
+  
+}
+
+/* Upload area fix for image preview */
+.upload-area {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.upload-area img {
+    border-radius: 8px;
+}
+
+/* Success popup full screen */
+.success-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: url('image/Frame 427318956.png') center/cover no-repeat;
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.6s ease;
+}
+
+/* dark overlay */
+.success-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.55);
+}
+
+/* close button */
+.success-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 45px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    z-index: 3;
+    transition: 0.2s ease;
+}
+
+.success-close:hover {
+    color: #facc15;  /* golden hover color */
+}
+
+/* text */
+.success-content {
+    position: relative;
+    text-align: center;
+    color: white;
+    z-index: 2;
+}
+
+.success-content h1 {
+    font-size: 40px;
+    font-weight: 900;
+    color: #facc15;
+}
+
+.success-content h2 {
+    font-size: 28px;
+    margin-top: 20px;
+}
+
+
+
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo" style="text-align:center;">
+      <img src="image/Frame 427318985.png" alt="Logo" />
+      <div class="company-name">VibeyGiftoy</div>
+    </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <div class="menu" id="menu">
+      <a href="index.html" class="active">Home</a>
+      <a href="categories.html">Categories</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="about.html">About Us</a>
+    </div>
+
+      <div class="nav-icons">
+        <img src="image/Photo by Clem Onojeghuo.png" class="icon profile" alt="Profile" id="profilePic">
+        
+        <div class="popup-menu" id="popupMenu">
+    <h3>My Accounts</h3>
+    <button class="act-btn">
+    <a href="account.html">Account Information</a>
+    </button>
+    <button class="act-btn">
+    <a href="order.html">My Order</a>
+    </button>
+    <button class="act-btn">
+    <a href="track.html">Tracking Order</a>
+    </button>
+    <button class="act-btn">
+    <a href="password.html">Password Manager</a>
+    </button>
+    <button class="act-btn">
+    <a href="logout.html">Logout</a>
+    </button>
+</div>
+<script>
+    const profilePic = document.getElementById('profilePic');
+    const popupMenu = document.getElementById('popupMenu');
+
+    // Toggle popup on click
+    profilePic.addEventListener('click', () => {
+        popupMenu.classList.toggle('show');
+    });
+
+    // Close popup when clicking outside
+    window.addEventListener('click', (e) => {
+        if (!profilePic.contains(e.target) && !popupMenu.contains(e.target)) {
+            popupMenu.classList.remove('show');
+        }
+    });
+</script>
+        <div class="icon-container">
+  <a href="wishlist.html" class="icon-wrapper" onclick="toggleDot('heartDot', 'heartIcon')">
+    <i class="fa-regular fa-heart icon" id="heartIcon"></i>
+    <span class="notify-dot" id="heartDot"></span>
+  </a>
+
+  <a href="cart.html" class="icon-wrapper" onclick="toggleDot('cartDot', 'cartIcon')">
+    <i class="fa-solid fa-cart-shopping icon" id="cartIcon"></i>
+    <span class="notify-dot" id="cartDot"></span>
+  </a>
+</div>
+<script>
+function toggleDot(dotId, iconId) {
+  const dot = document.getElementById(dotId);
+  const icon = document.getElementById(iconId);
+
+  if (dot.style.display === "block") {
+    dot.style.display = "none";
+    icon.classList.remove("active-heart", "active-cart");
+  } else {
+    dot.style.display = "block";
+    icon.classList.add(iconId === "heartIcon" ? "active-heart" : "active-cart");
+  }
+}
+</script>
+         <button id="notifyBtn" class="notify-btn">
+        <i class="fa-regular fa-bell icon"></i>
+        </button>
+    </div>
+    <!-- Popup Modal -->
+  <div id="notificationModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="notification-box">
+        <h3>🎁 Order/Delivery Notifications</h3>
+        
+          <p>We offer fast and reliable delivery to ensure your gifts arrive fresh, on time, and beautifully packaged. Choose from<br>
+          standard, express, or same-day delivery options at checkout
+        <p>
+      </div>
+    </div>
+  </div>
+ 
+     <script>
+    const modal = document.getElementById("notificationModal");
+    const btn = document.getElementById("notifyBtn");
+    const closeBtn = document.querySelector(".close");
+
+    btn.onclick = () => modal.style.display = "block";
+    closeBtn.onclick = () => modal.style.display = "none";
+    window.onclick = (e) => {
+      if (e.target === modal) modal.style.display = "none";
+    };
+  </script>
+
+  </nav>
+
+  <div class="search-bar">
+    <div style="position: relative; display: inline-block; width: 80%; max-width: 450px;">
+      <input id="searchInput" type="text" placeholder="Search" style="width: 100%;padding: 10px 40px 10px 12px; border: 1px solid #F1C40F; border-radius: 6px;" />
+      <span style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 18px; cursor: pointer;"><i class="fa-solid fa-magnifying-glass"></i></span>
+
+      <!-- Suggestions -->
+      <div id="suggestions" style="display:none; position:absolute; top:45px; left:0; width:100%; background:#fff; border:1px solid #ddd; border-radius:6px; box-shadow:0 4px 10px rgba(0,0,0,0.1); padding:10px; z-index:20;">
+        <p style="margin:0; padding:8px 0; cursor:pointer;">🎁 Personification Gifts</p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('menu').classList.toggle('show');
+    }
+
+    // Replace value on focus
+    document.addEventListener('DOMContentLoaded', function() {
+      const input = document.getElementById('searchInput');
+      input.addEventListener('focus', function() {
+        input.value = 'Personification Gifts';
+      });
+    });
+  </script>
+</body>
+</html>
+<div class="hero">
+    <img class="hero-bg" src="image/Frame 427318986.png" alt="Banner">
+
+
+    <div class="hero-content">
+        <h1>Wrapped with Love</h1>
+        <p>Every gift tells a story — add your personal touch with thoughtful wrapping and heartfelt notes</p>
+
+        <div class="hero-buttons">
+            <button class="primary-btn" onclick="window.location.href='categories.html'">Explore now</button>
+            <button class="secondary-btn" onclick="window.location.href='enquiry.html'">Enquiry</button>
+        </div>
+
+        <div class="hero-rating">
+            <img class="avatar" src="image/Group 30710.png">
+   <div class="plus-circle">+</div>
+            <span class="rating-text"> 4.9k Ratings+<br><small>Trusted by 50k customers</small></span>
+        </div>
+    </div>
+</div>
+<br>
+<section class="features-section">
+    <h2 class="section-title">Why Choose Us</h2>
+
+    <div class="features-container">
+
+        <div class="feature-box">
+            <div class="feature-card">
+                <img src="image/Christmas Gift Wrapping Ideas – 18 Creative Ways… 1.png" alt="Gift 1">
+            </div>
+            <h3 class="feature-title">Curated Gift Collections</h3>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-card">
+                <img src="image/This Night Lights item by ARTOPSHK has 3088… 2.png" alt="Gift 2">
+            </div>
+            <h3 class="feature-title">Persinalization Options</h3>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-card">
+                <img src="image/🚚✨ “Fantastic delivery service!” – Manmohan… 2.png" alt="Gift 3">
+            </div>
+            <h3 class="feature-title">Fast & Reliable Delivery</h3>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-card">
+                <img src="image/Qr code scanning with characters _ Premium Vector 2.png" alt="Gift 4">
+            </div>
+            <h3 class="feature-title">Easy & Secure Payments</h3>
+        </div>
+
+    </div>
+</section>
+<br>
+<section class="products-section">
+    <h2 class="main-heading">Featured Collections</h2>
+
+    <div class="products-container">
+
+        <div class="product-card">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+
+            <img src="image/image 52.png" class="product-img">
+
+            <h3 class="product-title">The Picture Fram set</h3>
+            <p class="product-subtitle">Rs: 1000 Per Package</p>
+
+            <div class="card-actions">
+                <button class="shop-btn" onclick="window.location.href='cart.html'">Shop Now</button>
+                <button class="customize-btn openPopup">Customize</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+
+            <img src="image/image 53.png" class="product-img">
+            <h3 class="product-title">The Picture Fram set</h3>
+            <p class="product-subtitle">Rs: 1000 Per Package</p>
+
+            <div class="card-actions">
+                <button class="shop-btn" onclick="window.location.href='cart.html'">Shop Now</button>
+                <button class="customize-btn openPopup">Customize</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+
+            <img src="image/image 52.png" class="product-img">
+            <h3 class="product-title">The Picture Fram set</h3>
+            <p class="product-subtitle">Rs: 1000 Per Package</p>
+
+            <div class="card-actions">
+                <button class="shop-btn" onclick="window.location.href='cart.html'">Shop Now</button>
+               <button class="customize-btn openPopup">Customize</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+
+            <img src="image/image 52.png" class="product-img">
+
+            <h3 class="product-title">The Picture Fram set</h3>
+            <p class="product-subtitle">Rs: 1000 Per Package</p>
+
+            <div class="card-actions">
+                <button class="shop-btn" onclick="window.location.href='cart.html'">Shop Now</button>
+                <button class="customize-btn openPopup">Customize</button>
+            </div>
+            
+        </div>
+
+    </div>
+</section>
+<script>
+        document.querySelectorAll(".heart-btn").forEach(btn => {
+    btn.addEventListener("click", function() {
+        this.classList.toggle("active");
+
+        let icon = this.querySelector("i");
+
+        if (this.classList.contains("active")) {
+            icon.classList.remove("fa-regular");
+            icon.classList.add("fa-solid");
+        } else {
+            icon.classList.remove("fa-solid");
+            icon.classList.add("fa-regular");
+        }
+    });
+});
+</script>
+<br>
+
+<h2 class="about-heading">Special offer & discounts</h2>
+        <h3 class="about-subheading">OFF SEASON <span style="color: #F1C40F;">COLLECTIONS</span> GET <span style="color: red;">30%</span></h3>
+<section class="about-section">
+    <div class="about-text">
+        
+        <p style="font-weight: 600;font-size: 32px;">"Unwrap the Joy - Special Offers Just for You!"</p>
+        <p>
+    Celebrate every moment with thoughtful giftd at irresistible prices.<br>
+    Discover handpicked treasures for every occasion - now on <br>
+    limited-time discount!
+        </p>
+    </div>
+
+    <div class="about-image">
+        <img src="image/image 8.png" alt="About Image">
+    </div>
+</section>
+<br>
+<section class="faq-section">
+    <h2 class="faq-heading">Frequently Asked Questions</h2>
+
+    <div class="faq-box">
+        <div class="faq-item">
+            <h3 class="faq-question">1. What types of gifts do you offer? <span style="margin-left: 450px;">v</span></h3>
+            <p class="faq-answer">We offer a wide range of gifts for all occasions-birthdays, anniversaries, weddings, corporate<br>
+            events, and more. Our collection includes personalized items, luxury hampers, home decor, custom <br>
+        keepsakes, and curated gift boxes.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3 class="faq-question">2. Do you offer gift wrapping or personalized messages? <span style="margin-left: 250px;">v</span></h3>
+            <p class="faq-answer">Yes! We offer free gift wrapping and the option to include a personalized message with <br>
+            every order. Simpl select the option during checkout.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3 class="faq-question">3. How long does delivery take?<span style="margin-left: 500px;">v</span></h3>
+            <p class="faq-answer">Delivery times vary depending on your location and the product. Standard shipping usually takes<br>
+            3-7 business days, while express shipping is available for 1-3 day delivery. Custom/personalized <br>
+        items may take an extra 1-2 days for processing.</p>
+        </div>
+
+    </div>
+</section>
+<br>
+
+<div id="customPopup" class="popup-overlay">
+    <div class="popup-box">
+
+        <span id="closePopup" class="close-btn">&times;</span>
+
+        <h1 class="popup-title">Gift Customization Details Form</h1>
+
+        <div class="form-grid">
+
+            <div class="field">
+                <label>Recipient’s Name</label>
+                <input type="text" required>
+            </div>
+
+            <div class="field">
+                <label>Color Choice</label>
+               <input type="text" required>
+            </div>
+
+            <div class="field">
+                <label>Date / month / year</label>
+                <input type="date" required>
+            </div>
+
+            <div class="field">
+                <label>Font Style</label>
+                <input type="text" required>
+            </div>
+
+            <div class="field">
+                <label>Custom Message</label>
+                <input type="text" required>
+            </div>
+            <br>
+           <div class="field image-preview-section">
+                <img id="belowFontImage" src="image/image 9.png" alt="Preview Image">
+            </div>
+           <div class="upload-box" style="margin-left: 70%;">
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="imageUpload" accept="image/*" style="display:none;">
+                    <div class="upload-icon" id="uploadIcon">⬆️</div>
+                    <p>Upload Image</p>
+
+                    <!-- preview image -->
+                    <img id="previewImg" style="display:none; width:100%; height:100%; object-fit:cover; border-radius:8px;">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="choice">
+            <label><input type="radio" name="choice"> Yes</label>
+            <label><input type="radio" name="choice"> No</label>
+        </div>
+
+        <button class="submit-btn">Submit</button>
+
+    </div>
+</div>
+<script>
+  // Popup open/close
+const popup = document.getElementById("customPopup");
+const closePopup = document.getElementById("closePopup");
+
+document.querySelectorAll(".openPopup").forEach(btn => {
+    btn.addEventListener("click", () => {
+        popup.style.display = "flex";
+    });
+});
+
+// Close function remains the same
+closePopup.onclick = () => popup.style.display = "none";
+
+window.onclick = (e) => {
+    if (e.target === popup) popup.style.display = "none";
+};
+
+
+
+// Upload icon triggers file input
+const uploadIcon = document.getElementById("uploadIcon");
+const imageUpload = document.getElementById("imageUpload");
+const previewImg = document.getElementById("previewImg");
+
+uploadIcon.onclick = () => imageUpload.click();
+
+// When image selected → preview it
+imageUpload.onchange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        previewImg.src = URL.createObjectURL(file);
+        previewImg.style.display = "block";
+
+        // Hide icon & text when preview shows
+        uploadIcon.style.display = "none";
+    }
+};
+
+
+</script>
+
+<div id="successPopup" class="success-overlay">
+    <span id="closeSuccess" class="success-close">&times;</span>
+
+    <div class="success-content">
+        <h1>Customization details updated Success</h1>
+        <h2>Check your Dashboard</h2>
+    </div>
+</div>
+<script>
+
+  const closeSuccess = document.getElementById("closeSuccess");
+
+closeSuccess.onclick = () => {
+    successPopup.style.display = "none";
+};
+  const submitBtn = document.querySelector(".submit-btn");
+const successPopup = document.getElementById("successPopup");
+const mainPopup = document.getElementById("customPopup");
+
+submitBtn.onclick = () => {
+    mainPopup.style.display = "none";   // close form popup
+    successPopup.style.display = "flex"; // show success popup
+};
+
+</script>
+<br>
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- Logo Section -->
+    <div class="footer-logo">
+     <div class="logo" style="text-align:center;">
+      <img src="image/Frame 427318985.png" alt="Logo" />
+      <div class="company-name">VibeyGiftoy</div>
+    </div>
+    </div>
+
+    <!-- Links Section -->
+    <div class="footer-links">
+      <div>
+        <h3>Customer service</h3>
+        <ul>
+          <li><a href="#">My Account</a></li>
+          <li><a href="#">Checkup</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Return</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Company</h3>
+        <ul>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Blogs</a></li>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Policy</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Our information</h3>
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms & Condition</a></li>
+          <li><a href="#">Customer Feedback</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="footer-contact">
+      <p><strong>Mobile:</strong> 123-456-789</p>
+      <p><strong>Email:</strong> Vibeygif@gmail.com</p>
+      <p><strong>Address:</strong> 12, North City-001</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Giftey Co. All rights reserved.</p>
+    <p><a href="#">Terms & Conditions</a> | <a href="#">Privacy Policy</a></p>
+  </div>
+</footer>
+
+
+
+<script src="script.js"></script>
+</body>
+</html>
+
+

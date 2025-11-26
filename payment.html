@@ -1,0 +1,642 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment</title>
+
+  <!-- Font Awesome -->
+   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+   <style>
+ /* Wishlist Item Row */
+    .wishlist-item {
+        width: 80%;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      border: 1px solid black;
+      justify-content: space-between; /* align to left */
+      flex-wrap: wrap;
+      margin-left: 10%;
+    }
+
+    .wishlist-item img {
+      width: 120px;
+      border-radius: 10px;
+    }
+
+    .wishlist-item .product-name {
+      font-weight: 500;
+      font-size: 18px;
+      flex: 1;
+      min-width: 180px;
+      margin-left: 150px;
+    }
+
+    .wishlist-item .price {
+      color: green;
+      font-weight: 500;
+      min-width: 80px;
+       margin-left: -100px;
+    }
+
+    .wishlist-item .date {
+      min-width: 150px;
+      color: #333;
+      margin-right: 200px;
+    }
+
+/* RIGHT SECTION */
+.right-section {
+  flex: 1;
+}
+
+/* IMAGE BELOW */
+.product-image-box img {
+  width: 250px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* RADIO BUTTON IMAGES */
+.payment-options {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.radio-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 190px;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.radio-box img {
+  width: 100px;
+  height: 100px;
+  margin-left: 70px;
+  object-fit: cover;
+  margin-top: -60px;
+ 
+}
+.colored-radio {
+  accent-color: #f1c70f; /* Change to any color */
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+/* PAYMENT CARD */
+.payment-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px dashed black;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.payment-left {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.payment-left label {
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.payment-left input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.payment-card img {
+  width: 150px;
+  margin-left: 90%;
+  margin-top: -300px;
+
+}
+
+/* FINAL PROCEED BUTTON */
+.final-btn {
+  margin-top: 200px;
+  margin-right: 50%;
+  width: 80%;
+  padding: 12px;
+  background: #F1C40F;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  font-size: 16px;
+  cursor: pointer;
+ 
+}
+
+.checkout-wrapper {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  padding: 20px;
+}
+    /* Order Summary */
+    .order-summary {
+      border: 1px solid #000;
+      border-radius: 10px;
+      padding: 20px;
+      min-width: 280px;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+      margin-right: 20%;
+    }
+
+    .order-summary h3 {
+      margin-top: 0;
+      border-bottom: 1px dashed #999;
+      padding-bottom: 10px;
+    }
+
+    .order-summary p {
+      margin: 8px 0;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .order-summary p span {
+      color: #333;
+    }
+
+    .order-summary .total {
+      border-top: 1px dashed #999;
+      padding-top: 10px;
+      font-weight: 600;
+      color: green;
+    }
+
+    .order-summary button {
+      width: 100%;
+      padding: 10px 0;
+      border: none;
+      border-radius: 30px;
+      background-color: #F1C40F;
+      color: #fff;
+      font-weight: 500;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    .order-summary button:hover {
+      background-color: #caad38;
+    }
+    /* MOBILE */
+@media (max-width: 768px) {
+  .checkout-flex {
+    flex-direction: column-reverse;
+  }
+
+  .payment-options {
+    flex-direction: column;
+  }
+}
+   .summary-image {
+  margin-top: -30px;
+ 
+  text-align: center;
+  margin-right: 1020px;
+}
+
+.summary-image img {
+ 
+  width: 550px;
+  height: 500px;
+  display: block;
+  margin: 0 auto;
+}
+/* Payment Popup */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup-box {
+  background: #fff;
+  width: 350px;
+  text-align: center;
+  padding: 30px;
+  border-radius: 15px;
+  animation: fadeIn 0.4s ease;
+  position: relative;
+}
+
+/* Tick icon */
+.success-icon {
+  background: #36d65b;
+  color: #fff;
+  font-size: 35px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: pop 0.4s ease-out;
+}
+
+.success-text {
+  font-size: 20px;
+  font-weight: bold;
+  color: #f2b52c;
+  margin-top: 15px;
+}
+
+.close-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #f2b52c;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background: #c18c18;
+}
+
+/* Animations */
+@keyframes pop {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+.popup.success {
+  display: none;
+  position: fixed;
+  top: 50%;
+  right: -450px;   /* Start hidden off-screen */
+  transform: translateY(-50%);
+  width: 420px;
+  height: 500px;
+  padding: 30px;
+  background: #1b1b1b;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(255, 200, 0, 0.4);
+  text-align: center;
+  z-index: 9999;
+  color: #fff;
+  animation: slideRight 0.5s ease-out forwards;
+}
+
+/* Slide animation */
+@keyframes slideRight {
+  from { right: -450px; opacity: 0; }
+  to   { right: 40px;  opacity: 1; }
+}
+
+
+/* Checkmark Circle */
+.popup.success .success-icon {
+  width: 100px;
+  height: 100px;
+  background: #1dd11d;
+  border-radius: 50%;
+  color: white;
+  font-size: 55px;
+  line-height: 100px;
+  margin: 30px auto;
+  box-shadow: 0 0 25px rgba(0, 255, 0, 0.6);
+  animation: pulse 1.5s infinite;
+}
+
+.popup.success h2 {
+  font-size: 26px;
+  margin-top: 15px;
+  color: #ffc300;
+  font-weight: bold;
+}
+
+
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo" style="text-align:center;">
+      <img src="image/Frame 427318985.png" alt="Logo" />
+      <div class="company-name">VibeyGiftoy</div>
+    </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <div class="menu" id="menu">
+      <a href="index.html" >Home</a>
+      <a href="categories.html">Categories</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="about.html">About Us</a>
+    </div>
+
+      <div class="nav-icons">
+       <img src="image/Photo by Clem Onojeghuo.png" class="icon profile" alt="Profile" id="profilePic">
+        
+        <div class="popup-menu" id="popupMenu">
+    <h3>My Accounts</h3>
+    <button class="act-btn">
+    <a href="account.html">Account Information</a>
+    </button>
+    <button class="act-btn">
+    <a href="order.html">My Order</a>
+    </button>
+    <button class="act-btn">
+    <a href="track.html">Tracking Order</a>
+    </button>
+    <button class="act-btn">
+    <a href="password.html">Password Manager</a>
+    </button>
+    <button class="act-btn">
+    <a href="logout.html">Logout</a>
+    </button>
+</div>
+<script>
+    const profilePic = document.getElementById('profilePic');
+    const popupMenu = document.getElementById('popupMenu');
+
+    // Toggle popup on click
+    profilePic.addEventListener('click', () => {
+        popupMenu.classList.toggle('show');
+    });
+
+    // Close popup when clicking outside
+    window.addEventListener('click', (e) => {
+        if (!profilePic.contains(e.target) && !popupMenu.contains(e.target)) {
+            popupMenu.classList.remove('show');
+        }
+    });
+</script>
+ <div class="icon-container">
+  <a href="wishlist.html" class="icon-wrapper" onclick="toggleDot('heartDot', 'heartIcon')">
+    <i class="fa-regular fa-heart icon" id="heartIcon"></i>
+    <span class="notify-dot" id="heartDot"></span>
+  </a>
+
+  <a href="cart.html" class="icon-wrapper" onclick="toggleDot('cartDot', 'cartIcon')">
+    <i class="fa-solid fa-cart-shopping icon" id="cartIcon"></i>
+    <span class="notify-dot" id="cartDot"></span>
+  </a>
+</div>
+<script>
+function toggleDot(dotId, iconId) {
+  const dot = document.getElementById(dotId);
+  const icon = document.getElementById(iconId);
+
+  if (dot.style.display === "block") {
+    dot.style.display = "none";
+    icon.classList.remove("active-heart", "active-cart");
+  } else {
+    dot.style.display = "block";
+    icon.classList.add(iconId === "heartIcon" ? "active-heart" : "active-cart");
+  }
+}
+</script>
+       <button id="notifyBtn" class="notify-btn">
+        <i class="fa-regular fa-bell icon"></i>
+        </button>
+    </div>
+    <!-- Popup Modal -->
+  <div id="notificationModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="notification-box">
+        <h3>🎁 Order/Delivery Notifications</h3>
+        
+          <p>We offer fast and reliable delivery to ensure your gifts arrive fresh, on time, and beautifully packaged. Choose from<br>
+          standard, express, or same-day delivery options at checkout
+        <p>
+      </div>
+    </div>
+  </div>
+ 
+     <script>
+    const modal = document.getElementById("notificationModal");
+    const btn = document.getElementById("notifyBtn");
+    const closeBtn = document.querySelector(".close");
+
+    btn.onclick = () => modal.style.display = "block";
+    closeBtn.onclick = () => modal.style.display = "none";
+    window.onclick = (e) => {
+      if (e.target === modal) modal.style.display = "none";
+    };
+  </script>
+
+  </nav>
+
+  <div class="search-bar">
+    <div style="position: relative; display: inline-block; width: 80%; max-width: 450px;">
+      <input id="searchInput" type="text" placeholder="Search" style="width: 100%;padding: 10px 40px 10px 12px; border: 1px solid #F1C40F; border-radius: 6px;" />
+      <span style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 18px; cursor: pointer;"><i class="fa-solid fa-magnifying-glass"></i></span>
+
+      <!-- Suggestions -->
+      <div id="suggestions" style="display:none; position:absolute; top:45px; left:0; width:100%; background:#fff; border:1px solid #ddd; border-radius:6px; box-shadow:0 4px 10px rgba(0,0,0,0.1); padding:10px; z-index:20;">
+        <p style="margin:0; padding:8px 0; cursor:pointer;">🎁 Personification Gifts</p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<br>
+<h1 style="text-align: center;">Payment Selection</h1>
+    <div class="wishlist-item">
+      <img src="image/image 35.png" alt="frame pic" />
+      <div class="product-name">The Picture Frame set</div>
+      <div class="date">22 August 2025</div>
+       <div class="price">₹1000</div>
+    </div>
+
+<div class="checkout-wrapper">
+
+  <!-- LEFT SIDE — ORDER SUMMARY -->
+  <div class="order-summary">
+    <h3>Order Summary</h3>
+    <p><span>Items</span><span>1</span></p>
+    <p><span>Subtotal</span><span>Rs.1200</span></p>
+    <p><span>Shipping</span><span>Rs.00.0</span></p>
+    <p><span>Taxes</span><span>Rs0.00</span></p>
+    <p><span>Coupon Discount</span><span>Rs.200</span></p>
+    <p class="total"><span>Total</span><span style="color: green;">₹1000</span></p>
+  </div>
+
+
+  <!-- RIGHT SIDE CONTENT -->
+  <div class="right-section">
+
+    <!-- IMAGE BELOW ORDER SUMMARY (LEFT OF FLEX) -->
+    <div class="product-image-box">
+      <img src="your-image.jpg" alt="">
+    </div>
+
+    <!-- RADIO BUTTONS WITH IMAGE -->
+    <div class="payment-options">
+      <label class="radio-box">
+        <input type="radio" name="pay"class="colored-radio"  style="margin-right: 120px;margin-top: 60px;">
+        <img src="image/image 28.png">
+      </label>
+
+      <label class="radio-box">
+        <input type="radio" name="pay"class="colored-radio" style="margin-right: 120px;margin-top: 60px;">
+        <img src="image/image 29.png" alt="">
+      </label>
+
+      <label class="radio-box">
+        <input type="radio" name="pay" class="colored-radio"style="margin-right: 120px;margin-top: 60px;">
+        <img src="image/image 30.png" alt="">
+      </label>
+    </div>
+<div class="payment-card">
+    <div id="upiPopup" class="popup">
+    <h3>Name :</h3>
+    <input type="text" id="nameInput" placeholder="Enter your name">
+    <h3>Enter UPI ID :</h3>
+    <input type="text" id="upiInput" placeholder="example@upi">
+    <br>
+    <img src="image/image 28.png" alt="gpay" >
+    <button id="proceedBtn" style="background-color: #F1C40F;margin-left: 50%;border-radius: 15px;padding: 10px;border: none;">Proceed</button>
+  </div>
+</div>
+<div id="overlay"></div>
+<div id="successPopup" class="popup success">
+    <div class="success-icon">✔</div>
+    <h2>Payment Successfully Done</h2>
+  </div>
+</div>
+
+<script>
+ const upiPopup = document.getElementById("upiPopup");
+const successPopup = document.getElementById("successPopup");
+const overlay = document.getElementById("overlay");
+const proceedBtn = document.getElementById("proceedBtn");
+
+proceedBtn.addEventListener("click", () => {
+  let name = document.getElementById("nameInput").value.trim();
+  let upi = document.getElementById("upiInput").value.trim();
+
+  if (!name || !upi.includes("@")) {
+    alert("Please fill Name & Valid UPI ID");
+    return;
+  }
+
+  // Hide input popup
+  upiPopup.style.display = "none";
+
+  // Show success popup
+  successPopup.style.display = "block";
+
+  // After 2.5 seconds redirect
+  setTimeout(() => {
+    window.location.href = "order.html";
+  }, 2500);
+});
+
+// Show initial popup
+upiPopup.style.display = "block";
+overlay.style.display = "block";
+
+</script>
+
+  </div>
+</div>
+
+    <div class="summary-image">
+      <img src="image/image 52.png" alt="pic" />
+    </div>
+
+
+
+
+<br>
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- Logo Section -->
+    <div class="footer-logo">
+     <div class="logo" style="text-align:center;">
+      <img src="image/Frame 427318985.png" alt="Logo" />
+      <div class="company-name">VibeyGiftoy</div>
+    </div>
+    </div>
+
+    <!-- Links Section -->
+    <div class="footer-links">
+      <div>
+        <h3>Customer service</h3>
+        <ul>
+          <li><a href="#">My Account</a></li>
+          <li><a href="#">Checkup</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Return</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Company</h3>
+        <ul>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Blogs</a></li>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Policy</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Our information</h3>
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms & Condition</a></li>
+          <li><a href="#">Customer Feedback</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="footer-contact">
+      <p><strong>Mobile:</strong> 123-456-789</p>
+      <p><strong>Email:</strong> Vibeygif@gmail.com</p>
+      <p><strong>Address:</strong> 12, North City-001</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Giftey Co. All rights reserved.</p>
+    <p><a href="#">Terms & Conditions</a> | <a href="#">Privacy Policy</a></p>
+  </div>
+</footer>
+
+
+
+<script src="script.js"></script>
+</body>
+</html>
+
